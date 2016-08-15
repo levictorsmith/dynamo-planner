@@ -1,0 +1,68 @@
+/* Changing MAIN element attributes */
+body { padding-bottom: 50px; }
+
+/*********************
+ * APP ELEMENTS
+ *********************/
+/* SCHEDULE */
+.list-group-item {
+  height: 2em;
+  line-height: normal;
+  padding: 5px;
+}
+#schedule {
+
+}
+/* HIGHLIGHTS */
+#highlights {
+
+}
+.highlight-section {
+
+}
+.highlight-item {
+
+}
+/* STARRED-HIGHLIGHTS */
+#starred-highlights {
+
+}
+/* GOALS */
+#goals {
+
+}
+#goals-box {
+
+}
+#notes-box {
+
+}
+/* WHAT-GOOD */
+#what-good {
+
+}
+#will-do-good {
+
+}
+#have-done-good {
+
+}
+/* FOOTER */
+#footer {
+  
+}
+/*********************
+ * ELEMENT CONTAINERS
+ *********************/
+/* MAIN-SCREEN */
+#main-screen {
+
+}
+/* LEFT-HALF */
+#left-half {
+
+}
+/* RIGHT-HALF */
+#right-half {
+
+}

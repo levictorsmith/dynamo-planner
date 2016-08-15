@@ -19,7 +19,7 @@
       </nav>
       <div id="main-screen" class="container">
          <div id="left-half" class="pull-left">
-            <div id="schedule" class="">
+            <div id="schedule">
                <ul class="list-group">
                  <li class="list-group-item">6</li>
                  <li class="list-group-item">7</li>
@@ -58,10 +58,10 @@
                </ul>
             </div>
             <div id="highlights">
-               <div id="morning" class="">
+               <div id="morning" class="highlight-section">
                   <table class="table">
                      <caption>Morning</caption>
-                     <tr id="highlight-item">
+                     <tr class="highlight-item">
                         <td>
                            <span style="font-size: 150%; color: red; font-weight: 600;">&#9312;</span>
                            <span>This is text</span>
@@ -69,7 +69,7 @@
                      </tr>
                   </table>
                </div>
-               <div id="noon" class="">
+               <div id="noon" class="highlight-section">
                   <table class="table">
                      <caption>Noon</caption>
                      <tr id="highlight-item">
@@ -80,7 +80,7 @@
                      </tr>
                   </table>
                </div>
-               <div id="evening" class="">
+               <div id="evening" class="highlight-section">
                   <table class="table">
                      <caption>Evening</caption>
                      <tr id="highlight-item">
@@ -94,18 +94,23 @@
             </div>
          </div>
          <div id="right-half" class="pull-right">
-            <div id="starred-highlights" class="">
+            <div id="starred-highlights">
+               Reminders:
             </div>
-            <div id="goals" class="">
+            <div id="goals">
                <div id="goals-box">
+                  Goals:
                </div>
                <div id="notes-box">
+                  Notes:
                </div>
             </div>
-            <div id="what-good" class="">
-               <div id="will-do-good" class="">
+            <div id="what-good">
+               <div id="will-do-good">
+                  <textarea name="will" class="form-control" placeholder="What good shall I do today?"></textarea>
                </div>
-               <div id="have-done-good" class="">
+               <div id="have-done-good">
+                  <textarea name="done" class="form-control" placeholder="What good have I done today?"></textarea>
                </div>
             </div>
          </div>
@@ -114,7 +119,7 @@
       <nav class="navbar navbar-default navbar-fixed-bottom action-buttons">
          <div class="container-fluid action-buttons">
             <!-- <div class=""> -->
-               <ul class="nav navbar-nav">
+               <ul id="footer" class="nav navbar-nav">
                   <li id="actionbar-item">
                      <a href="javascript:newEvent();">
                         <img id="event-image" src="content/event.svg" alt="Add Event">
