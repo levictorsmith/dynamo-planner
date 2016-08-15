@@ -3,18 +3,18 @@
 
 })();
 function newEvent() {
-  $('eventModal').show();
+  $('#eventModal').modal('show');
   console.log("Added Event");
 }
 function newReminder() {
-  $('reminderModal').show();
+  $('#reminderModal').modal('show');
   console.log("Added Reminder");
 }
 function newGoal() {
-  $('goalModal').show();
+  $('#goalModal').modal('show');
   console.log("Added Goal");
 }
 function newNote() {
-  $('noteModal').show();
+  $('#noteModal').modal('show');
   console.log("Added Note");
 }
