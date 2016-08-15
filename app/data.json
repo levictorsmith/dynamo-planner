@@ -1,0 +1,28 @@
+{
+  "items": [{
+    "src": "preview2.jpg",
+    "alt": "Cobbler2",
+    "id": "carousel-item-2",
+    "caption": "..."
+    }, {
+    "src": "preview3.jpg",
+    "alt": "Cobbler3",
+    "id": "carousel-item-3",
+    "caption": "..."
+    }, {
+      "src": "preview4.jpg",
+      "alt": "Cobbler4",
+      "id": "carousel-item-4",
+      "caption": "..."
+      }],
+
+  "products": [{
+    "src": "triple_preview2.jpg",
+    "alt": "Product2",
+    "href": "http://www.cobblerstick.com/"
+    }, {
+      "src": "triple_preview3.jpg",
+      "alt": "Product3",
+      "href": "http://www.cobblerstick.com/"
+      }]
+}
