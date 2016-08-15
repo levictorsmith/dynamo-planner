@@ -13,7 +13,6 @@ body {
 }
 #schedule {
   width: 50%;
-  padding-right: 1em;
 }
 /* HIGHLIGHTS */
 #highlights {
@@ -104,6 +103,8 @@ border: 1px solid #ddd;
 #main-screen {
   width: 100%;
   height: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 /* LEFT-HALF */
 #left-half {
@@ -116,4 +117,12 @@ border: 1px solid #ddd;
   width: 49%;
   display: block;
   height: 65em;
+}
+/* MODALS */
+/*EventModal*/
+/*ReminderModal*/
+/*GoalModal*/
+/*NoteModal*/
+#note-input {
+  resize: none;
 }

@@ -72,7 +72,7 @@
                <div id="noon" class="highlight-section">
                   <table class="table">
                      <caption>Noon</caption>
-                     <tr id="highlight-item">
+                     <tr class="highlight-item">
                         <td>
                            <span style="font-size: 150%; color: red; font-weight: 600;">&#9312;</span>
                            <span>This is text</span>
@@ -83,7 +83,7 @@
                <div id="evening" class="highlight-section">
                   <table class="table">
                      <caption>Evening</caption>
-                     <tr id="highlight-item">
+                     <tr class="highlight-item">
                         <td>
                            <span style="font-size: 150%; color: red; font-weight: 600;">&#9312;</span>
                            <span>This is text</span>
@@ -159,11 +159,11 @@
               <h4 class="modal-title">New Event</h4>
             </div>
             <div class="modal-body">
-              <p>One fine body&hellip;</p>
+               <input class="form-control" placeholder="Description">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary">Add Event</button>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -177,11 +177,18 @@
                 <h4 class="modal-title">New Goal</h4>
               </div>
               <div class="modal-body">
-                <p>One fine body&hellip;</p>
+                <input class="form-control" placeholder="Description">
+                <label for="priority">Priority</label>
+                <select class="form-control" name="priority">
+                   <option value="0">None</option>
+                   <option value="1">1 (Urgent)</option>
+                   <option value="2">2 (Important)</option>
+                   <option value="3">3 (Sometime Today)</option>
+                </select>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add Goal</button>
               </div>
             </div><!-- /.modal-content -->
          </div><!-- /.modal-dialog -->
@@ -195,11 +202,19 @@
                <h4 class="modal-title">New Reminder</h4>
              </div>
              <div class="modal-body">
-               <p>One fine body&hellip;</p>
+               <input class="form-control" placeholder="Remind you to...">
+               <label>When</label>
+               <label for="priority">Priority</label>
+               <select class="form-control" name="priority">
+                  <option value="0">None</option>
+                  <option value="1">1 (Urgent)</option>
+                  <option value="2">2 (Important)</option>
+                  <option value="3">3 (Sometime Today)</option>
+               </select>
              </div>
              <div class="modal-footer">
-               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-               <button type="button" class="btn btn-primary">Save changes</button>
+               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+               <button type="button" class="btn btn-primary">Add Reminder</button>
              </div>
            </div><!-- /.modal-content -->
          </div><!-- /.modal-dialog -->
@@ -213,11 +228,11 @@
               <h4 class="modal-title">New Note</h4>
             </div>
             <div class="modal-body">
-              <p>One fine body&hellip;</p>
+              <textarea id="note-input" class="form-control" placeholder="Enter text..." rows="10"></textarea>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary">Add Note</button>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
