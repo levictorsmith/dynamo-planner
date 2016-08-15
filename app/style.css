@@ -1,21 +1,24 @@
 /* Changing MAIN element attributes */
-body { padding-bottom: 50px; }
+body {
+  padding-bottom: 50px;
+}
 
 /*********************
  * APP ELEMENTS
  *********************/
 /* SCHEDULE */
 .list-group-item {
-  height: 2em;
-  line-height: normal;
   padding: 5px;
+  height: 2em;
 }
 #schedule {
-
+  width: 50%;
+  padding-right: 1em;
 }
 /* HIGHLIGHTS */
 #highlights {
-
+width: 50%;
+padding-left: 1em;
 }
 .highlight-section {
 
@@ -29,23 +32,25 @@ body { padding-bottom: 50px; }
 }
 /* GOALS */
 #goals {
+  display: flex;
 
 }
 #goals-box {
-
+  width: 50%;
 }
 #notes-box {
-
+  width: 50%;
 }
 /* WHAT-GOOD */
 #what-good {
+  display: flex;
 
 }
 #will-do-good {
-
+  width: 50%;
 }
 #have-done-good {
-
+  width: 50%;
 }
 /* FOOTER */
 #footer {
@@ -53,13 +58,14 @@ body { padding-bottom: 50px; }
   justify-content: space-between;
 }
 #actionbar-item {
-  /*margin-left: 7em;
-  margin-right: 7em;*/
   width: 25%;
   border-right: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#actionbar-item:last-child {
+  border: none;
 }
 .actionbar-item-link {
   display: flex;
@@ -77,17 +83,16 @@ body { padding-bottom: 50px; }
  *********************/
 /* MAIN-SCREEN */
 #main-screen {
-  padding: 0;
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 100%;
+  height: 100%;
 }
 /* LEFT-HALF */
 #left-half {
-  width: 50%;
-  height: 100%;
+  width: 49%;
+  display: flex;
 }
 /* RIGHT-HALF */
 #right-half {
-  width: 50%;
-  height: 100%;
+  width: 49%;
+  display: block;
 }
