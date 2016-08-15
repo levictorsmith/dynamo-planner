@@ -49,20 +49,45 @@ body { padding-bottom: 50px; }
 }
 /* FOOTER */
 #footer {
-  
+  display: flex;
+  justify-content: space-between;
+}
+#actionbar-item {
+  /*margin-left: 7em;
+  margin-right: 7em;*/
+  width: 25%;
+  border-right: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.actionbar-item-link {
+  display: flex;
+  align-items: center;
+}
+.nav.navbar-nav {
+  width: 100%;
+}
+.container-fluid.action-buttons {
+  margin: 0;
+  width: 100%;
 }
 /*********************
  * ELEMENT CONTAINERS
  *********************/
 /* MAIN-SCREEN */
 #main-screen {
-
+  padding: 0;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 /* LEFT-HALF */
 #left-half {
-
+  width: 50%;
+  height: 100%;
 }
 /* RIGHT-HALF */
 #right-half {
-
+  width: 50%;
+  height: 100%;
 }
