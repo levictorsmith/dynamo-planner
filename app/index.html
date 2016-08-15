@@ -204,6 +204,24 @@
              <div class="modal-body">
                <input class="form-control" placeholder="Remind you to...">
                <label>When</label>
+               <div ng-controller="TimepickerDemoCtrl">
+                 <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+                 <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
+                 <div class="row">
+                   <div class="col-xs-6">
+                       Hours step is:
+                     <select class="form-control" ng-model="hstep" ng-options="opt for opt in options.hstep"></select>
+                   </div>
+                   <div class="col-xs-6">
+                       Minutes step is:
+                     <select class="form-control" ng-model="mstep" ng-options="opt for opt in options.mstep"></select>
+                   </div>
+                 </div>
+                 <hr>
+                 <button type="button" class="btn btn-info" ng-click="toggleMode()">12H / 24H</button>
+                 <button type="button" class="btn btn-default" ng-click="update()">Set to 14:00</button>
+                 <button type="button" class="btn btn-danger" ng-click="clear()">Clear</button>
+               </div>
                <label for="priority">Priority</label>
                <select class="form-control" name="priority">
                   <option value="0">None</option>
@@ -241,6 +259,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script src="ui-bootstrap-tpls-2.0.1.min.js"type="text/javascript"></script>
       <script type="text/javascript" src="main.js"></script>
    </body>
 </html>
