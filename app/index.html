@@ -8,6 +8,189 @@
       <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
    </head>
    <body>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <!-- <a class="navbar-brand" href="#"> -->
+              <!-- <img alt="Brand" src=""> -->
+            <!-- </a> -->
+          </div>
+        </div>
+      </nav>
+      <div id="main-screen" class="container">
+         <div id="left-half" class="pull-left">
+            <div id="schedule" class="">
+               <ul class="list-group">
+                 <li class="list-group-item">6</li>
+                 <li class="list-group-item">7</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">8</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">9</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">10</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">11</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">12</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">1</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">2</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">3</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">4</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">5</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">6</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">7</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">8</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">9</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">10</li>
+                 <li class="list-group-item"></li>
+                 <li class="list-group-item">11</li>
+               </ul>
+            </div>
+            <div id="highlights" class="">
+               <div id="morning" class="">
+               </div>
+               <div id="noon" class="">
+               </div>
+               <div id="evening" class="">
+               </div>
+            </div>
+         </div>
+         <div id="right-half" class="pull-right">
+            <div id="starred-highlights" class="">
+            </div>
+            <div id="goals" class="">
+               <div id="goals-box">
+               </div>
+               <div id="notes-box">
+               </div>
+            </div>
+            <div id="what-good" class="">
+               <div id="will-do-good" class="">
+               </div>
+               <div id="have-done-good" class="">
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- FOOTER -->
+      <nav class="navbar navbar-default navbar-fixed-bottom action-buttons">
+         <div class="container-fluid action-buttons">
+            <!-- <div class=""> -->
+               <ul class="nav navbar-nav">
+                  <li id="add-event" class="">
+                     <a href="javascript:newEvent();">
+                        <img id="event-image" src="" alt="Add Event">
+                        <p class="pull-right">Add Event</p>
+                     </a>
+                  </li>
+                  <li id="add-reminder" class="col-md-3">
+                     <a href="javascript:newReminder();">
+                        <img id="reminder-image" src="" alt="Add Reminder">
+                        <p class="pull-right">Add Reminder</p>
+                     </a>
+                  </li>
+                  <li id="add-goal" class="col-md-3">
+                     <a href="javascript:newGoal();">
+                        <img id="goal-image" src="" alt="Add Goal">
+                        <p class="pull-right">Add Goal</p>
+                     </a>
+                  </li>
+                  <li id="add-note" class="col-md-3">
+                     <a href="javascript:newNote();">
+                        <img id="note-image" src="" alt="Add Note">
+                        <p class="pull-right">Add Note</p>
+                     </a>
+                  </li>
+               </ul>
+            <!-- </div> -->
+         </div>
+      </nav>
+
+      <!-- MODALS -->
+      <!-- EventModal -->
+      <div id="eventModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">New Event</h4>
+            </div>
+            <div class="modal-body">
+              <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+     </div><!-- /.modal -->
+     <!-- GoalModal -->
+     <div id="goalModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="goalModalLabel">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">New Goal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div><!-- /.modal-content -->
+         </div><!-- /.modal-dialog -->
+       </div><!-- /.modal -->
+       <!-- ReminderModal -->
+       <div id="reminderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reminderModalLabel">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title">New Reminder</h4>
+             </div>
+             <div class="modal-body">
+               <p>One fine body&hellip;</p>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary">Save changes</button>
+             </div>
+           </div><!-- /.modal-content -->
+         </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <!-- NoteModal -->
+      <div id="noteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">New Note</h4>
+            </div>
+            <div class="modal-body">
+              <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+     </div><!-- /.modal -->
+     <!-- Scripts -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
