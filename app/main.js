@@ -1,5 +1,19 @@
 (function (){
   var app = angular.module('dynamo-planner', ['ui.bootstrap']);
+  // define additional triggers on Tooltip and Popover
+  app.controller('PopoverCtrl', function ($scope, $log) {
+    $scope.dynamicPopover = {
+      templateUrl: 'signIn.html',
+      title: 'Sign In'
+    };
+    $scope.check = function () {
+      if (firebase.auth().currentUser) {
+        firebase.auth().signOut();
+      }
+    };
+    $scope.isOpen = false;
+    $scope.isOpen1 = false;
+  });
   app.controller('EventController', function ($scope, $log) {
     $scope.dateTime = new Date();
     $scope.date = new Date();
@@ -14,12 +28,20 @@
     };
     $scope.addEvent = function () {
       $log.log($scope.dateTime);
+      $log.log("Added Event");
+      addEvent();
     };
   });
   app.directive('eventModal', function () {
     return {
       restrict: 'E',
       templateUrl: 'eventModal.html'
+    };
+  });
+  app.directive('firebase', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'firebase.html'
     };
   });
   app.directive('reminderModal', function () {
@@ -132,15 +154,22 @@ function addEvent() {
   // var date = new Date("8/13/1993");
   // var time = new Date();
   // var dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
-  console.log(dateTime);
+  // console.log(dateTime);
   //Add badge with number and with type color
   // var date = document.getElementById('eventDate').value;
   // var time = document.getElementById('eventTime').value;
   // console.log($ngModel.mytime);
   // console.log(new Date(date));
-  // console.log("Added Event");
+  console.log("hey");
 }
 function test(testing) {
   console.log("Hello!");
   console.log(testing);
 }
+
+$("#sign-in-button").focusin(function () {
+  console.log("Changed focus?");
+  if (firebase.auth().currentUser) {
+    $("#sign-in-button").click();
+  }
+});

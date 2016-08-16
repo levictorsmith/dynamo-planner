@@ -105,6 +105,16 @@ border: 1px solid #ddd;
 /*********************
  * ELEMENT CONTAINERS
  *********************/
+ /* HEADER */
+ #sign-in-button {
+   margin-right: 0.5em;
+ }
+ #sign-up-button {
+   margin-right: 1em;
+ }
+ #go-sign-in {
+   margin-left: 1em;
+ }
 /* MAIN-SCREEN */
 #main-screen {
   width: 100%;

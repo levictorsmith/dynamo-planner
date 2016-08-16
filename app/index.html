@@ -6,16 +6,39 @@
       <base href="./" target="_blank" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+      <!-- <firebase></firebase> -->
    </head>
    <body>
-      <nav class="navbar navbar-default">
+      <nav id="headerBar" class="navbar navbar-default" ng-controller="PopoverCtrl">
         <div class="container-fluid">
           <div class="navbar-header">
-            <!-- <a class="navbar-brand" href="#"> -->
-              <!-- <img alt="Brand" src=""> -->
-            <!-- </a> -->
+            <a class="navbar-brand" href="#" target="_self">
+              <img alt="Brand" src="">
+            </a>
           </div>
+          <button id="sign-up-button" uib-popover-template="'signUp.html'" popover-title="Sign Up" popover-placement="bottom-right" popover-is-open="isOpen1" type="button" class="btn btn-default navbar-btn navbar-right">Sign Up</button>
+          <button id="sign-in-button" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" popover-placement="bottom-right" popover-is-open="isOpen" type="button" class="btn btn-primary navbar-btn navbar-right" ng-click="check()">Sign in</button>
+          <p id="signed-in-as" class="navbar-text navbar-right" style="margin-right: 1em;">Signed in as</p>
         </div>
+        <script type="text/ng-template" id="signIn.html">
+            <div class="form-group" style="width: 15em;">
+               <input id="email" type="email" ng-model="email" class="form-control" placeholder="Email">
+               <input id="password" type="password" ng-model="password" class="form-control" placeholder="Password">
+               <br/>
+               <a href="javascript:sendPasswordReset();">Forgot password?</a>
+               <button id="go-sign-in" type="button" class="btn btn-default" onclick="toggleSignIn()" ng-click="$parent.isOpen = false">Go</button>
+            </div>
+         </script>
+         <script type="text/ng-template" id="signUp.html">
+             <div class="form-group" style="width: 15em;">
+                <label>Email:</label>
+                <input id="email" type="email" ng-model="email" class="form-control">
+                <label>Password:</label>
+                <input id="password" type="password" ng-model="password" class="form-control">
+                <br/>
+                <button id="go-sign-up" type="button" class="btn btn-default" onclick="handleSignUp()" ng-click="$parent.isOpen1 = false">Go</button>
+             </div>
+          </script>
       </nav>
       <div id="main-screen" class="container">
          <div id="left-half" class="pull-left">
@@ -191,11 +214,26 @@
       <reminder-modal></reminder-modal>
       <goal-modal></goal-modal>
       <note-modal></note-modal>
+
      <!-- Scripts -->
+     <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+     <script>
+      // Initialize Firebase
+      var config = {
+         apiKey: "AIzaSyAB-MckOG2fIHu7FKG4IFdoYfm3HlQFm5o",
+         authDomain: "dynamo-planner.firebaseapp.com",
+         databaseURL: "https://dynamo-planner.firebaseio.com",
+         storageBucket: "dynamo-planner.appspot.com",
+      };
+      firebase.initializeApp(config);
+     </script>
+     <script type="text/javascript" src="auth.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       <script src="ui-bootstrap-tpls-2.0.1.min.js"type="text/javascript"></script>
       <script type="text/javascript" src="main.js"></script>
+
+
    </body>
 </html>
