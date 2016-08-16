@@ -1,0 +1,35 @@
+<!-- ReminderModal -->
+<div id="reminderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reminderModalLabel">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">New Reminder</h4>
+     </div>
+     <div class="modal-body">
+        <input class="form-control description" placeholder="Remind you to...">
+        <div id="reminder-container" class="container">
+           <div id="rc-timepicker">
+             <label for="timepicker">When</label>
+             <div id="timepicker" ng-controller="TimepickerDemoCtrl">
+                 <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+             </div>
+           </div>
+           <div id="rc-priority">
+             <label for="priority">Priority</label>
+             <select class="form-control" name="priority">
+                 <option value="0">None</option>
+                 <option value="1">1 (Urgent)</option>
+                 <option value="2">2 (Important)</option>
+                 <option value="3">3 (Sometime Today)</option>
+             </select>
+           </div>
+        </div>
+     </div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Add Reminder</button>
+     </div>
+   </div><!-- /.modal-content -->
+ </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

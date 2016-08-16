@@ -1,5 +1,30 @@
 (function (){
   var app = angular.module('dynamo-planner', ['ui.bootstrap']);
+  app.directive('eventModal', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'eventModal.html'
+    };
+  });
+  app.directive('reminderModal', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'reminderModal.html'
+    };
+  });
+  app.directive('goalModal', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'goalModal.html'
+    };
+  });
+  app.directive('noteModal', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'noteModal.html'
+    };
+  });
+
   // TIMEPICKER CONTROLLER
   app.controller('TimepickerDemoCtrl', function ($scope, $log) {
   $scope.mytime = new Date();
@@ -89,6 +114,13 @@ function newNote() {
 }
 function addEvent() {
   //Add badge with number and with type color
-  
-  console.log("Added Event");
+  // var date = document.getElementById('eventDate').value;
+  // var time = document.getElementById('eventTime').value;
+  // console.log($ngModel.mytime);
+  // console.log(new Date(date));
+  // console.log("Added Event");
+}
+function test(testing) {
+  console.log("Hello!");
+  console.log(testing);
 }

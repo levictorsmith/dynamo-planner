@@ -1,0 +1,32 @@
+<!-- EventModal -->
+<div id="eventModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel">
+ <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">New Event</h4>
+      </div>
+      <div class="modal-body">
+         <input id="eventDescription" class="form-control" placeholder="Description">
+         <div id="event-when">
+            <div id="datepicker" ng-controller="DatepickerPopupDemoCtrl">
+               <h5 class="text-muted">When</h5>
+              <p class="input-group">
+                <input id="eventDate" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-submit="test(dt)"/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+            <div id="timepicker" ng-controller="TimepickerDemoCtrl">
+               <div id="eventTime" uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+            </div>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="addEvent()">Add Event</button>
+      </div>
+    </div><!-- /.modal-content -->
+ </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
