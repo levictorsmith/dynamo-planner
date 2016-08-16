@@ -14,6 +14,9 @@ body {
 #schedule {
   width: 50%;
 }
+#badge {
+  background-color: #d9534f;
+}
 /* HIGHLIGHTS */
 #highlights {
 width: 50%;
@@ -26,6 +29,9 @@ border: 1px solid #ddd;
 }
 .highlight-item {
 
+}
+.highlight-item:hover {
+  background-color: #ddd;
 }
 /* STARRED-HIGHLIGHTS */
 #starred-highlights {
@@ -119,8 +125,31 @@ border: 1px solid #ddd;
   height: 65em;
 }
 /* MODALS */
+.description {
+  margin-bottom: 1em;
+}
 /*EventModal*/
+#event-when {
+  display: flex;
+  /*align-items: center;*/
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.input-group {
+  margin: 0;
+}
+#datepicker {
+  margin-right: 1em;
+}
 /*ReminderModal*/
+#reminder-container {
+  width: inherit;
+  display: flex;
+  justify-content: center;
+}
+#rc-priority {
+  margin-left: 4em;
+}
 /*GoalModal*/
 /*NoteModal*/
 #note-input {
