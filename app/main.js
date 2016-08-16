@@ -1,5 +1,21 @@
 (function (){
   var app = angular.module('dynamo-planner', ['ui.bootstrap']);
+  app.controller('EventController', function ($scope, $log) {
+    $scope.dateTime = new Date();
+    $scope.date = new Date();
+    $scope.time = new Date();
+    $scope.updateDate = function (date) {
+      $scope.date = date;
+      $scope.dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), $scope.time.getHours(), $scope.time.getMinutes(), $scope.time.getSeconds());
+    };
+    $scope.updateTime = function (time) {
+      $scope.time = time;
+      $scope.dateTime = new Date($scope.date.getFullYear(), $scope.date.getMonth(), $scope.date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
+    };
+    $scope.addEvent = function () {
+      $log.log($scope.dateTime);
+    };
+  });
   app.directive('eventModal', function () {
     return {
       restrict: 'E',
@@ -37,8 +53,8 @@
   $scope.mstep = 15;
   $scope.ismeridian = true;
 
-  $scope.setTime = function() {
-
+  $scope.addReminder = function() {
+    $log.log($scope.mytime);
   };
 
   $scope.clear = function() {
@@ -64,7 +80,7 @@ app.controller('DatepickerPopupDemoCtrl', function ($scope) {
     formatYear: 'yy',
     maxDate: new Date(2030, 5, 22),
     minDate: new Date(),
-    startingDay: 1
+    startingDay: 0
   };
 
   function disabled(data) { return false; }
@@ -113,6 +129,10 @@ function newNote() {
   console.log("Added Note");
 }
 function addEvent() {
+  // var date = new Date("8/13/1993");
+  // var time = new Date();
+  // var dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
+  console.log(dateTime);
   //Add badge with number and with type color
   // var date = document.getElementById('eventDate').value;
   // var time = document.getElementById('eventTime').value;
