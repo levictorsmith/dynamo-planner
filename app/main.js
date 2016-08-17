@@ -36,16 +36,25 @@
         $log.log("DateTime: ", $scope.dateTime);
         $log.log("User: ", userId);
         // Add the event
-        var events = firebase.database().ref().child("events");
-        var newEvent = events.push();
-        newEvent.set({
-          description: description,
-          dateTime: date,
-          order: 1,
-          user: userId
-        });
-        $log.log("Added Event");
-        $('#eventModal').modal('hide');
+        if(description) {
+          var events = firebase.database().ref().child("events");
+          var newEvent = events.push();
+          newEvent.set({
+            description: description,
+            dateTime: date,
+            order: 1,
+            user: userId
+          });
+          $log.log("Added Event");
+          $('#eventModal').modal('hide');
+        } else {
+          $('#eventDesCon').addClass("has-error");
+          $('#eventAlert').show();
+          $('#eventDesCon').keypress(function () {
+            $("#eventDesCon").removeClass("has-error");
+            $('#eventAlert').hide();
+          });
+        }
       }
     };
   });
@@ -184,13 +193,53 @@ function newGoal() { $('#goalModal').modal('show'); }
 function newNote() { $('#noteModal').modal('show'); }
 
 function addNote() {
-
-  console.log("Added Note");
+  var text = $("#note-input").val();
+  var dateTime = new Date().toString();
+  var usr = firebase.auth().currentUser.uid;
+  if (text) {
+    var notes = firebase.database().ref().child("notes");
+    var newNote = notes.push();
+    newNote.set({
+      text: text,
+      dateTime: dateTime,
+      user: usr
+    });
+    console.log("Added Note");
+    $("#noteModal").modal('hide');
+  } else {
+    $('#noteAlert').show();
+    $('#note-input').keypress(function () {
+      $('#noteAlert').hide();
+    });
+  }
 }
+
 function addGoal() {
-
-  // console.log("Added Goal");
+  var description = $("#goalDescription").val();
+  var priority = parseInt($("#goalPriority").val());
+  var dateTime = new Date().toString();
+  var usr = firebase.auth().currentUser.uid;
+  if (description) {
+    var goals = firebase.database().ref().child("goals");
+    var newGoal = goals.push();
+    newGoal.set({
+      description: description,
+      dateTime: dateTime,
+      priority: priority,
+      user: usr
+    });
+    console.log("Added Goal");
+    $("#goalModal").modal('hide');
+  } else {
+    $('#goalDesCon').addClass("has-error");
+    $('#goalAlert').show();
+    $('#goalDesCon').keypress(function () {
+      $("#goalDesCon").removeClass("has-error");
+      $('#goalAlert').hide();
+    });
+  }
 }
+
 $("#sign-in-button").focusin(function () {
   console.log("Changed focus?");
   if (firebase.auth().currentUser) {

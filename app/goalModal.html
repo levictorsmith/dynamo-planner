@@ -7,9 +7,12 @@
           <h4 class="modal-title">New Goal</h4>
          </div>
          <div class="modal-body">
-          <input class="form-control description" placeholder="Description">
+            <div id="goalDesCon" class="">
+               <input id="goalDescription" class="form-control description" placeholder="Description">
+            </div>
+          <div hidden id="goalAlert" class="alert alert-danger" role="alert">Enter description</div>
           <label for="priority">Priority</label>
-          <select class="form-control" name="priority">
+          <select id="goalPriority" class="form-control" name="priority">
              <option value="0">None</option>
              <option value="1">1 (Urgent)</option>
              <option value="2">2 (Important)</option>
@@ -18,7 +21,7 @@
          </div>
          <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Add Goal</button>
+          <button type="button" class="btn btn-primary" onclick="addGoal()">Add Goal</button>
          </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -17,6 +17,11 @@ body {
 #badge {
   background-color: #d9534f;
 }
+#rBadge {
+  border: 2px solid #d9534f;
+  color: #d9534f;
+  background-color: transparent;
+}
 /* HIGHLIGHTS */
 #highlights {
 width: 50%;
@@ -144,6 +149,9 @@ border: 1px solid #ddd;
   /*align-items: center;*/
   padding-top: 1em;
   padding-bottom: 1em;
+}
+#eventDesCon {
+  margin-bottom: 1em;
 }
 .input-group {
   margin: 0;

@@ -7,11 +7,12 @@
         <h4 class="modal-title">New Note</h4>
       </div>
       <div class="modal-body">
+         <div hidden id="noteAlert" class="alert alert-danger" role="alert">Enter text</div>
         <textarea id="note-input" class="form-control" placeholder="Enter text..." rows="10"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Add Note</button>
+        <button type="button" class="btn btn-primary" onclick="addNote()">Add Note</button>
       </div>
     </div><!-- /.modal-content -->
  </div><!-- /.modal-dialog -->

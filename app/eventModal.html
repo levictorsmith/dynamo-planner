@@ -8,7 +8,10 @@
         <h4 class="modal-title">New Event</h4>
       </div>
       <div class="modal-body">
-         <input id="eventDescription" class="form-control" placeholder="Description">
+         <div id="eventDesCon" class="">
+            <input id="eventDescription" class="form-control" placeholder="Description">
+         </div>
+         <div hidden id="eventAlert" class="alert alert-danger" role="alert">Enter description</div>
          <div id="event-when">
             <div id="datepicker" ng-controller="DatepickerPopupDemoCtrl">
                <h5 class="text-muted">When</h5>
