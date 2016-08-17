@@ -27,22 +27,26 @@
       $scope.dateTime = new Date($scope.date.getFullYear(), $scope.date.getMonth(), $scope.date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
     };
     $scope.addEvent = function () {
-      $log.log($scope.dateTime);
-      $log.log("Added Event");
-      // var ref = new Firebase("https://dynamo-planner.firebaseio.com");
-      // var description = $("#eventDescription").val();
-      // var usr = ref.auth.uid;
-      // $log.log("Description: " + description);
-      // $log.log("DateTime: " + $scope.dateTime);
-      // $log.log("User: " + usr);
-      // var eventsRef = ref.child("events");
-      // var newEventRef = eventsRef.push();
-      // newEventRef.set({
-      //   description: description,
-      //   dateTime: $scope.dateTime,
-      //   user: usr
-      // });
-      addEvent($scope.dateTime);
+      if(firebase.auth().currentUser) {
+        var description = $("#eventDescription").val();
+        var userId = firebase.auth().currentUser.uid;
+        var date = $scope.dateTime.toString();
+        // TODO: Calculate the order # for each event
+        $log.log("Description: ", description);
+        $log.log("DateTime: ", $scope.dateTime);
+        $log.log("User: ", userId);
+        // Add the event
+        var events = firebase.database().ref().child("events");
+        var newEvent = events.push();
+        newEvent.set({
+          description: description,
+          dateTime: date,
+          order: 1,
+          user: userId
+        });
+        $log.log("Added Event");
+        $('#eventModal').modal('hide');
+      }
     };
   });
   app.directive('eventModal', function () {
@@ -89,7 +93,36 @@
   $scope.ismeridian = true;
 
   $scope.addReminder = function() {
-    $log.log($scope.mytime);
+    if(firebase.auth().currentUser) {
+      var description = $("#reminderDescription").val();
+      var dateTime = $scope.mytime.toString();
+      var priority = parseInt($("#reminderPriority").val());
+      var userId = firebase.auth().currentUser.uid;
+      $log.log("Description: ", description);
+      $log.log("DateTime: ", dateTime);
+      $log.log("User: ", userId);
+      $log.log("Priority: ", priority);
+      // Add the reminder
+      if(description) {
+        var reminders = firebase.database().ref().child("reminders");
+        var newReminder = reminders.push();
+        newReminder.set({
+          description: description,
+          dateTime: dateTime,
+          priority: priority,
+          user: userId
+        });
+        $log.log("Added Reminder");
+        $('#reminderModal').modal('hide');
+      } else {
+        $('#reminderDesCon').addClass("has-error");
+        $('#reminderAlert').show();
+        $('#reminderDesCon').keypress(function () {
+          $("#reminderDesCon").removeClass("has-error");
+          $('#reminderAlert').hide();
+        });
+      }
+    }
   };
 
   $scope.clear = function() {
@@ -145,33 +178,19 @@ app.controller('DatepickerPopupDemoCtrl', function ($scope) {
 });
 })();
 
-function newEvent() {
-  $('#eventModal').modal('show');
-}
+function newEvent() { $('#eventModal').modal('show'); }
+function newReminder() { $('#reminderModal').modal('show'); }
+function newGoal() { $('#goalModal').modal('show'); }
+function newNote() { $('#noteModal').modal('show'); }
 
-function newReminder() {
-  $('#reminderModal').modal('show');
-  console.log("Added Reminder");
-}
+function addNote() {
 
-function newGoal() {
-  $('#goalModal').modal('show');
-  console.log("Added Goal");
-}
-
-function newNote() {
-  $('#noteModal').modal('show');
   console.log("Added Note");
 }
-function addEvent(dateTime) {
-  var description = $("#eventDescription").val();
-  var db = new Firebase("https://dynamo-planner.firebaseio.com/");
-  var authData = db.getAuth();
-  console.log("DateTime: " + dateTime);
-  console.log("Description: " + description);
-  console.log("User: ");
-}
+function addGoal() {
 
+  // console.log("Added Goal");
+}
 $("#sign-in-button").focusin(function () {
   console.log("Changed focus?");
   if (firebase.auth().currentUser) {
