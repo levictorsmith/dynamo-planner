@@ -1,5 +1,9 @@
 (function (){
   var app = angular.module('dynamo-planner', ['ui.bootstrap']);
+  eventWatch();
+  reminderWatch();
+  goalWatch();
+  noteWatch();
   // define additional triggers on Tooltip and Popover
   app.controller('PopoverCtrl', function ($scope, $log) {
     $scope.dynamicPopover = {
@@ -238,6 +242,94 @@ function addGoal() {
       $('#goalAlert').hide();
     });
   }
+}
+
+function eventWatch() {
+  var events = firebase.database().ref().child("events");
+  events.on("child_added", function (snapshot, prevChildKey) {
+    var newEvent = snapshot.val();
+    console.log("ON ADDED: Description: " + newEvent.description);
+    console.log("ON ADDED: DateTime: " + newEvent.dateTime);
+    console.log("ON ADDED: User: " + newEvent.user);
+  });
+}
+
+function reminderWatch() {
+  var reminders = firebase.database().ref().child("reminders");
+  reminders.on("child_added", function (snapshot, prevChildKey) {
+    var newReminder = snapshot.val();
+    console.log("ON ADDED: Description: " + newReminder.description);
+    console.log("ON ADDED: DateTime: " + newReminder.dateTime);
+    console.log("ON ADDED: Priority: " + newReminder.priority);
+    console.log("ON ADDED: User: " + newReminder.user);
+    var dateTime = new Date(newReminder.dateTime);
+    var options = { minute: false};
+    var time = dateTime.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+    console.log(time);
+    var reminderMarkup;
+    switch (newReminder.priority) {
+      case 0:
+        reminderMarkup = "<li id=\"note\" class=\"list-group-item\">" + newReminder.description + "  @  " + time + "</li>";
+        $("#reminder-list").append(reminderMarkup);
+        break;
+      case 1:
+        reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-danger\">" + newReminder.description + "  @  " + time + "<span id=\"badge\" class=\"badge\">&#x2757;</span>" + "</li>";
+        $("#reminder-list").prepend(reminderMarkup);
+        break;
+      case 2:
+        reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-warning\">" + newReminder.description + "  @  " + time + "</li>";
+        $("#reminder-list").append(reminderMarkup);
+        break;
+      case 3:
+        reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-success\">" + newReminder.description + "  @  " + time + "</li>";
+        $("#reminder-list").append(reminderMarkup);
+        break;
+    }
+  });
+}
+
+function goalWatch() {
+  // TODO: Check for date
+  var goals = firebase.database().ref().child("goals");
+  goals.on("child_added", function (snapshot, prevChildKey) {
+    var newGoal = snapshot.val();
+    // console.log("ON ADDED: Description: " + newGoal.description);
+    // console.log("ON ADDED: DateTime: " + newGoal.dateTime);
+    // console.log("ON ADDED: Priority: " + newGoal.priority);
+    // console.log("ON ADDED: User: " + newGoal.user);
+    var goalMarkup;
+    switch (newGoal.priority) {
+      case 0:
+        goalMarkup = "<li id=\"note\" class=\"list-group-item\">" + newGoal.description + "</li>";
+        $("#goals-container").append(goalMarkup);
+        break;
+      case 1:
+        goalMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-danger\">" + newGoal.description + "<span id=\"badge\" class=\"badge\">&#x2757;</span>" + "</li>";
+        $("#goals-container").prepend(goalMarkup);
+        break;
+      case 2:
+        goalMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-warning\">" + newGoal.description + "</li>";
+        $("#goals-container").append(goalMarkup);
+        break;
+      case 3:
+        goalMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-success\">" + newGoal.description + "</li>";
+        $("#goals-container").append(goalMarkup);
+        break;
+    }
+  });
+}
+
+function noteWatch() {
+  // TODO: Check for date
+  var notes = firebase.database().ref().child("notes");
+  notes.on("child_added", function (snapshot, prevChildKey) {
+    var newNote = snapshot.val();
+    // console.log("ON ADDED: Text: " + newNote.text);
+    // console.log("ON ADDED: DateTime: " + newNote.dateTime);
+    // console.log("ON ADDED: User: " + newNote.user);
+    var noteMarkup = "<li id=\"note\" class=\"list-group-item\">" + newNote.text + "</li>";
+    $("#notes-container").append(noteMarkup);
+  });
 }
 
 $("#sign-in-button").focusin(function () {

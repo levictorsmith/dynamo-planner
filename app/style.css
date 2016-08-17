@@ -7,7 +7,7 @@ body {
  * APP ELEMENTS
  *********************/
 /* SCHEDULE */
-.list-group-item {
+.timeSpan {
   padding: 5px;
   height: 2em;
 }
@@ -21,6 +21,8 @@ body {
   border: 2px solid #d9534f;
   color: #d9534f;
   background-color: transparent;
+  border-radius: 50%;
+  display: initial;
 }
 /* HIGHLIGHTS */
 #highlights {
@@ -40,10 +42,20 @@ border: 1px solid #ddd;
 }
 /* STARRED-HIGHLIGHTS */
 #starred-highlights {
+  display: block;
   height: 40%;
   border: 1px solid #ddd;
   margin-bottom: 1em;
   padding: 5px;
+  overflow-y: auto;
+}
+#reminder {
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+#reminder:first-child {
+  border-top: none;
 }
 /* GOALS */
 #goals {
@@ -55,10 +67,28 @@ border: 1px solid #ddd;
   width: 50%;
   border-right: 1px solid #ddd;
   padding: 5px;
+  overflow-y: auto;
+}
+#goal {
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+#goal:first-child {
+    border-top: none;
 }
 #notes-box {
   width: 50%;
   padding: 5px;
+  overflow-y: auto;
+}
+#note {
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+#note:first-child {
+  border-top: none;
 }
 /* WHAT-GOOD */
 #what-good {
