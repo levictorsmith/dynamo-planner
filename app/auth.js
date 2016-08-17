@@ -53,9 +53,6 @@ function handleSignUp() {
   }
   // Sign in with email and pass.
   // [START createwithemail]
-  // [START sendemailverification]
-  // firebase.auth().currentUser.sendEmailVerification();
-  // [END sendemailverification]
   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;

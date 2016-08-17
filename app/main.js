@@ -29,7 +29,20 @@
     $scope.addEvent = function () {
       $log.log($scope.dateTime);
       $log.log("Added Event");
-      addEvent();
+      // var ref = new Firebase("https://dynamo-planner.firebaseio.com");
+      // var description = $("#eventDescription").val();
+      // var usr = ref.auth.uid;
+      // $log.log("Description: " + description);
+      // $log.log("DateTime: " + $scope.dateTime);
+      // $log.log("User: " + usr);
+      // var eventsRef = ref.child("events");
+      // var newEventRef = eventsRef.push();
+      // newEventRef.set({
+      //   description: description,
+      //   dateTime: $scope.dateTime,
+      //   user: usr
+      // });
+      addEvent($scope.dateTime);
     };
   });
   app.directive('eventModal', function () {
@@ -150,21 +163,13 @@ function newNote() {
   $('#noteModal').modal('show');
   console.log("Added Note");
 }
-function addEvent() {
-  // var date = new Date("8/13/1993");
-  // var time = new Date();
-  // var dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
-  // console.log(dateTime);
-  //Add badge with number and with type color
-  // var date = document.getElementById('eventDate').value;
-  // var time = document.getElementById('eventTime').value;
-  // console.log($ngModel.mytime);
-  // console.log(new Date(date));
-  console.log("hey");
-}
-function test(testing) {
-  console.log("Hello!");
-  console.log(testing);
+function addEvent(dateTime) {
+  var description = $("#eventDescription").val();
+  var db = new Firebase("https://dynamo-planner.firebaseio.com/");
+  var authData = db.getAuth();
+  console.log("DateTime: " + dateTime);
+  console.log("Description: " + description);
+  console.log("User: ");
 }
 
 $("#sign-in-button").focusin(function () {
