@@ -242,69 +242,74 @@ function eventWatch(uid) {
 }
 
 function reminderWatch(uid) {
-    var reminders = firebase.database().ref().child(uid).child("reminders").orderByChild("date").equalTo(today);
+    var reminders = firebase.database().ref().child(uid).child("reminders").orderByChild("priority");
     reminders.on("child_added", function (snapshot, prevChildKey) {
-      console.log(snapshot.val().description);
       var newReminder = snapshot.val();
-      var time = newReminder.time;
-      var options = { minute: false};
-      var reminderMarkup;
-      switch (newReminder.priority) {
-        case 4:
+      if (newReminder.date == today) {
+        var time = newReminder.time;
+        var options = { minute: false};
+        var reminderMarkup;
+        switch (newReminder.priority) {
+          case 4:
           reminderMarkup = "<li id=\"note\" class=\"list-group-item\">" + newReminder.description + "  @  " + time + "</li>";
           $("#reminder-list").append(reminderMarkup);
           break;
-        case 1:
+          case 1:
           reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-danger\">" + newReminder.description + "  @  " + time + "<span id=\"badge\" class=\"badge\">&#x2757;</span>" + "</li>";
           $("#reminder-list").prepend(reminderMarkup);
           break;
-        case 2:
+          case 2:
           reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-warning\">" + newReminder.description + "  @  " + time + "</li>";
           $("#reminder-list").append(reminderMarkup);
           break;
-        case 3:
+          case 3:
           reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-success\">" + newReminder.description + "  @  " + time + "</li>";
           $("#reminder-list").append(reminderMarkup);
           break;
-      }
+        }
 
+      }
     });
 }
 
 function goalWatch(uid) {
-  // TODO: Check for date
-  var goals = firebase.database().ref().child(uid).child("goals").orderByChild("date").equalTo(today);
+  var goals = firebase.database().ref().child(uid).child("goals").orderByChild("priority");
   goals.on("child_added", function (snapshot, prevChildKey) {
     var newGoal = snapshot.val();
-    var goalMarkup;
-    switch (newGoal.priority) {
-      case 0:
+    if (newGoal.date == today) {
+      var goalMarkup;
+      switch (newGoal.priority) {
+        case 0:
         goalMarkup = "<li id=\"note\" class=\"list-group-item\">" + newGoal.description + "</li>";
         $("#goals-container").append(goalMarkup);
         break;
-      case 1:
+        case 1:
         goalMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-danger\">" + newGoal.description + "<span id=\"badge\" class=\"badge\">&#x2757;</span>" + "</li>";
         $("#goals-container").prepend(goalMarkup);
         break;
-      case 2:
+        case 2:
         goalMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-warning\">" + newGoal.description + "</li>";
         $("#goals-container").append(goalMarkup);
         break;
-      case 3:
+        case 3:
         goalMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-success\">" + newGoal.description + "</li>";
         $("#goals-container").append(goalMarkup);
         break;
+      }
     }
   });
 }
 
 function noteWatch(uid) {
   // TODO: Check for date
-  var notes = firebase.database().ref().child(uid).child("notes").orderByChild("date").equalTo(today);
+  var notes = firebase.database().ref().child(uid).child("notes");
   notes.on("child_added", function (snapshot, prevChildKey) {
+    console.log("HOW MANY TIMES?");
     var newNote = snapshot.val();
-    var noteMarkup = "<li id=\"note\" class=\"list-group-item\">" + newNote.text + "</li>";
-    $("#notes-container").append(noteMarkup);
+    if (newNote.date == today) {
+      var noteMarkup = "<li id=\"note\" class=\"list-group-item\">" + newNote.text + "</li>";
+      $("#notes-container").append(noteMarkup);
+    }
   });
 }
 
