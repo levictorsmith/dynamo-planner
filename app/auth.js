@@ -1,3 +1,4 @@
+var gUID;
 /**
  * Handles the sign in button press.
  */
@@ -131,6 +132,11 @@ function initApp() {
       var uid = user.uid;
       var refreshToken = user.refreshToken;
       var providerData = user.providerData;
+      gUID = uid;
+      // eventWatch(uid);
+      // reminderWatch(uid);
+      // goalWatch(uid);
+      // noteWatch(uid);
       // [START_EXCLUDE silent]
       document.getElementById('signed-in-as').textContent = 'Signed in as ' + email;
       document.getElementById('sign-in-button').textContent = 'Sign out';
@@ -157,35 +163,37 @@ function initApp() {
 }
 window.onload = function() {
   initApp();
+  loadWatchers(gUID);
 };
 
 function addUserToDatabase(uid) {
+  var dateTime = new Date().toString();
   firebase.database().ref().child(uid).set({
     // id: uid,
     events: {
         123: {
           description: "This is my first event",
-          dateTime: "date"
+          dateTime: dateTime
         }
       },
     reminders: {
       124: {
         description: "This is a reminder",
-        dateTime: "date",
+        dateTime: dateTime,
         priority: 1
       }
     },
     goals: {
       125: {
         description: "This is a goal",
-        dateTime: "date",
+        dateTime: dateTime,
         priority: 2
       }
     },
     notes: {
       126: {
         text: "This is a note",
-        dateTime: "date"
+        dateTime: dateTime
       }
     }
   });

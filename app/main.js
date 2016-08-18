@@ -1,15 +1,11 @@
 /***********************************
- * Declare Global Variables
+ * Declare Global Variable
  ***********************************/
- var gEventIndex = 1;
- var gReminderIndex = 1;
- var gGoalIndex = 1;
+ var gEventIndex = 0;
+ var today = new Date().toLocaleDateString();
+ console.log("TODAY: ", today);
 (function (){
   var app = angular.module('dynamo-planner', ['ui.bootstrap']);
-  // eventWatch();
-  // reminderWatch();
-  // goalWatch();
-  // noteWatch();
   // define additional triggers on Tooltip and Popover
   app.controller('PopoverCtrl', function ($scope, $log) {
     $scope.dynamicPopover = {
@@ -40,20 +36,20 @@
       if(firebase.auth().currentUser) {
         var description = $("#eventDescription").val();
         var userId = firebase.auth().currentUser.uid;
-        var date = $scope.dateTime.toString();
+        var date = $scope.dateTime.toLocaleDateString();
+        var time = $scope.dateTime.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
         // TODO: Calculate the order # for each event
-        $log.log("Description: ", description);
-        $log.log("DateTime: ", $scope.dateTime);
-        $log.log("User: ", userId);
         // Add the event
         if(description) {
-          var events = firebase.database().ref().child("events");
+          var events = firebase.database().ref().child(userId).child("events");
           var newEvent = events.push();
+          gEventIndex++;
+          console.log(gEventIndex);
           newEvent.set({
             description: description,
-            dateTime: date,
-            order: 1,
-            user: userId
+            date: date,
+            time: time,
+            order: gEventIndex
           });
           $log.log("Added Event");
           $('#eventModal').modal('hide');
@@ -72,12 +68,6 @@
     return {
       restrict: 'E',
       templateUrl: 'eventModal.html'
-    };
-  });
-  app.directive('firebase', function () {
-    return {
-      restrict: 'E',
-      templateUrl: 'firebase.html'
     };
   });
   app.directive('reminderModal', function () {
@@ -114,22 +104,23 @@
   $scope.addReminder = function() {
     if(firebase.auth().currentUser) {
       var description = $("#reminderDescription").val();
-      var dateTime = $scope.mytime.toString();
+      // var date = $scope.mytime.toLocaleDateString();
       var priority = parseInt($("#reminderPriority").val());
       var userId = firebase.auth().currentUser.uid;
+      var time = $scope.mytime.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
       $log.log("Description: ", description);
-      $log.log("DateTime: ", dateTime);
+      $log.log("Time: ", time);
       $log.log("User: ", userId);
       $log.log("Priority: ", priority);
       // Add the reminder
       if(description) {
-        var reminders = firebase.database().ref().child("reminders");
+        var reminders = firebase.database().ref().child(userId).child("reminders");
         var newReminder = reminders.push();
         newReminder.set({
           description: description,
-          dateTime: dateTime,
-          priority: priority,
-          user: userId
+          date: today,
+          time: time,
+          priority: priority
         });
         $log.log("Added Reminder");
         location.reload();
@@ -157,13 +148,6 @@ app.controller('DatepickerPopupDemoCtrl', function ($scope) {
   };
   $scope.today();
   $scope.format = 'shortDate';
-
-  $scope.inlineOptions = {
-    customClass: getDayClass,
-    minDate: new Date(),
-    showWeeks: true
-  };
-
   $scope.dateOptions = {
     dateDisabled: disabled,
     formatYear: 'yy',
@@ -171,33 +155,28 @@ app.controller('DatepickerPopupDemoCtrl', function ($scope) {
     minDate: new Date(),
     startingDay: 0
   };
-
   function disabled(data) { return false; }
-
   $scope.open1 = function() { $scope.popup1.opened = true; };
-  $scope.open2 = function() { $scope.popup2.opened = true; };
-
   $scope.popup1 = { opened: false };
-  $scope.popup2 = { opened: false };
-
-  function getDayClass(data) {
-    var date = data.date,
-      mode = data.mode;
-    if (mode === 'day') {
-      var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-      for (var i = 0; i < $scope.events.length; i++) {
-        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-        if (dayToCheck === currentDay) {
-          return $scope.events[i].status;
-        }
-      }
-    }
-    return '';
-  }
 });
 })();
+
+function loadWatchers(uid) {
+  firebase.auth().onAuthStateChanged(function (authData) {
+    if (authData) {
+      console.log("User is logged in");
+      eventWatch(authData.uid);
+      noteWatch(authData.uid);
+      goalWatch(authData.uid);
+      reminderWatch(authData.uid);
+    } else {
+      console.log("User is logged out");
+      $("#notes-container").empty();
+      $("#goals-container").empty();
+      $("#reminder-list").empty();
+    }
+  });
+}
 
 function newEvent() { $('#eventModal').modal('show'); }
 function newReminder() { $('#reminderModal').modal('show'); }
@@ -209,12 +188,11 @@ function addNote() {
   var dateTime = new Date().toString();
   var usr = firebase.auth().currentUser.uid;
   if (text) {
-    var notes = firebase.database().ref().child("notes");
+    var notes = firebase.database().ref().child(usr).child("notes");
     var newNote = notes.push();
     newNote.set({
       text: text,
-      dateTime: dateTime,
-      user: usr
+      date: today
     });
     console.log("Added Note");
     $("#noteModal").modal('hide');
@@ -232,13 +210,12 @@ function addGoal() {
   var dateTime = new Date().toString();
   var usr = firebase.auth().currentUser.uid;
   if (description) {
-    var goals = firebase.database().ref().child("goals");
+    var goals = firebase.database().ref().child(usr).child("goals");
     var newGoal = goals.push();
     newGoal.set({
       description: description,
-      dateTime: dateTime,
-      priority: priority,
-      user: usr
+      date: today,
+      priority: priority
     });
     console.log("Added Goal");
     location.reload();
@@ -253,24 +230,24 @@ function addGoal() {
   }
 }
 
-function eventWatch() {
-  var events = firebase.database().ref().child("events");
+function eventWatch(uid) {
+  var events = firebase.database().ref().child(uid).child("events").orderByChild("date").equalTo(today);
   events.on("child_added", function (snapshot, prevChildKey) {
     var newEvent = snapshot.val();
     console.log("ON ADDED: Description: " + newEvent.description);
-    console.log("ON ADDED: DateTime: " + newEvent.dateTime);
-    console.log("ON ADDED: User: " + newEvent.user);
+    console.log("ON ADDED: Date: " + newEvent.date);
+    console.log("ON ADDED: Order: " + newEvent.order);
+    console.log("ON ADDED: Time: " + newEvent.time);
   });
 }
 
-function reminderWatch() {
-    var reminders = firebase.database().ref().child(firebase.auth().currentUser.uid).child("reminders").orderByChild("priority");
+function reminderWatch(uid) {
+    var reminders = firebase.database().ref().child(uid).child("reminders").orderByChild("date").equalTo(today);
     reminders.on("child_added", function (snapshot, prevChildKey) {
-      console.log("Does it work?");
+      console.log(snapshot.val().description);
       var newReminder = snapshot.val();
-      var dateTime = new Date(newReminder.dateTime);
+      var time = newReminder.time;
       var options = { minute: false};
-      var time = dateTime.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
       var reminderMarkup;
       switch (newReminder.priority) {
         case 4:
@@ -294,9 +271,9 @@ function reminderWatch() {
     });
 }
 
-function goalWatch() {
+function goalWatch(uid) {
   // TODO: Check for date
-  var goals = firebase.database().ref().child("goals").orderByChild("priority");
+  var goals = firebase.database().ref().child(uid).child("goals").orderByChild("date").equalTo(today);
   goals.on("child_added", function (snapshot, prevChildKey) {
     var newGoal = snapshot.val();
     var goalMarkup;
@@ -321,9 +298,9 @@ function goalWatch() {
   });
 }
 
-function noteWatch() {
+function noteWatch(uid) {
   // TODO: Check for date
-  var notes = firebase.database().ref().child("notes");
+  var notes = firebase.database().ref().child(uid).child("notes").orderByChild("date").equalTo(today);
   notes.on("child_added", function (snapshot, prevChildKey) {
     var newNote = snapshot.val();
     var noteMarkup = "<li id=\"note\" class=\"list-group-item\">" + newNote.text + "</li>";
@@ -337,3 +314,7 @@ $("#sign-in-button").focusin(function () {
     $("#sign-in-button").click();
   }
 });
+
+function test() {
+  console.log("HEY!");
+}
