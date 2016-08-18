@@ -39,7 +39,6 @@
         var userId = firebase.auth().currentUser.uid;
         var date = $scope.dateTime.toLocaleDateString();
         var time = $scope.dateTime.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
-        // TODO: Calculate the order # for each event
         // Add the event
         if(description) {
           var events = firebase.database().ref().child(userId).child("events");
@@ -174,6 +173,8 @@ function loadWatchers(uid) {
       $("#notes-container").empty();
       $("#goals-container").empty();
       $("#reminder-list").empty();
+      $('.eventBadge').remove();
+      $(".highlight-item").remove();
       gEventIndex = 1;
     }
   });
@@ -250,8 +251,34 @@ function eventWatch(uid) {
     if (minute >= 30) {
       timeSpanID += "-30";
     }
-    var markup = "<span id=\"badge\" class=\"badge\">" + newEvent.order + "</span>";
+    // Add the event badge
+    var markup = "<span id=\"badge\" class=\"badge eventBadge\">" + newEvent.order + "</span>";
     $(timeSpanID).prepend(markup);
+    // Add the Event highlight
+    var markup2 = "<tr class=\"highlight-item\"><td><span id=\"rBadge\" class=\"badge\">" + newEvent.order + "</span><span>" + newEvent.description + "</span></td></tr>";
+    switch (hour) {
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 12:
+        // Insert into noon
+        console.log("NOON");
+        $("#noon").append(markup2);
+        break;
+      default:
+        if (median == "AM") {
+          // Insert into Morning
+          console.log("MORNING");
+          $("#morning").append(markup2);
+        } else {
+          // Insert into Evening
+          console.log("EVENING");
+          $("#evening").append(markup2);
+        }
+        break;
+    }
   });
 }
 

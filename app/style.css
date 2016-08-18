@@ -26,6 +26,7 @@ body {
   background-color: transparent;
   border-radius: 50%;
   display: initial;
+  margin-right: 5px;
 }
 /* HIGHLIGHTS */
 #highlights {
