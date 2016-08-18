@@ -1,6 +1,6 @@
 /* Changing MAIN element attributes */
 body {
-  padding-bottom: 50px;
+  padding-bottom: 4.3em;
 }
 
 /*********************
@@ -10,6 +10,9 @@ body {
 .timeSpan {
   padding: 5px;
   height: 2em;
+}
+#timeSpan-list {
+  margin-bottom: 0;
 }
 #schedule {
   width: 50%;
@@ -115,6 +118,7 @@ border: 1px solid #ddd;
 #footer {
   display: flex;
   justify-content: space-between;
+  height: 4.3em;
 }
 #actionbar-item {
   width: 25%;
@@ -156,18 +160,16 @@ border: 1px solid #ddd;
   height: 100%;
   padding-left: 30px;
   padding-right: 30px;
+  padding-bottom: 1em;
 }
 /* LEFT-HALF */
 #left-half {
-  width: 49%;
   display: flex;
-
 }
 /* RIGHT-HALF */
 #right-half {
-  width: 49%;
   display: block;
-  height: 65em;
+  height: 64.7em;
 }
 /* MODALS */
 .description {
@@ -176,7 +178,6 @@ border: 1px solid #ddd;
 /*EventModal*/
 #event-when {
   display: flex;
-  /*align-items: center;*/
   padding-top: 1em;
   padding-bottom: 1em;
 }

@@ -42,16 +42,18 @@
           </script>
       </nav>
       <!-- MAIN SCREEN -->
-      <div id="main-screen" class="container">
-         <div id="left-half" class="pull-left">
+      <div id="main-screen" class="container-fluid">
+         <div id="main-row" class="row">
+         <div id="left-half" class="col-md-6">
             <div id="schedule">
-               <ul class="list-group">
+               <ul id="timeSpan-list" class="list-group">
                  <li id="time-6" class="list-group-item timeSpan">
                     <span>6</span>
                     <!-- <span id="badge" class="badge">1</span> -->
                  </li>
                  <li id="AM-7" class="list-group-item timeSpan">
                     <span>7</span>
+
                  </li>
                  <li id="AM-7-30" class="list-group-item timeSpan"></li>
                  <li id="AM-8" class="list-group-item timeSpan">
@@ -155,7 +157,7 @@
                </div>
             </div>
          </div>
-         <div id="right-half" class="pull-right">
+         <div id="right-half" class="col-md-6">
             <div id="starred-highlights">
                <h4>Reminders:</h4>
                <ul id="reminder-list" class="list-group">
@@ -182,6 +184,7 @@
                </div>
             </div>
          </div>
+      </div>
       </div>
       <!-- FOOTER -->
       <nav id="footer" class="navbar navbar-default navbar-fixed-bottom action-buttons">

@@ -1,9 +1,15 @@
+/***********************************
+ * Declare Global Variables
+ ***********************************/
+ var gEventIndex = 1;
+ var gReminderIndex = 1;
+ var gGoalIndex = 1;
 (function (){
   var app = angular.module('dynamo-planner', ['ui.bootstrap']);
-  eventWatch();
-  reminderWatch();
-  goalWatch();
-  noteWatch();
+  // eventWatch();
+  // reminderWatch();
+  // goalWatch();
+  // noteWatch();
   // define additional triggers on Tooltip and Popover
   app.controller('PopoverCtrl', function ($scope, $log) {
     $scope.dynamicPopover = {
@@ -126,7 +132,9 @@
           user: userId
         });
         $log.log("Added Reminder");
+        location.reload();
         $('#reminderModal').modal('hide');
+
       } else {
         $('#reminderDesCon').addClass("has-error");
         $('#reminderAlert').show();
@@ -233,6 +241,7 @@ function addGoal() {
       user: usr
     });
     console.log("Added Goal");
+    location.reload();
     $("#goalModal").modal('hide');
   } else {
     $('#goalDesCon').addClass("has-error");
@@ -255,48 +264,41 @@ function eventWatch() {
 }
 
 function reminderWatch() {
-  var reminders = firebase.database().ref().child("reminders");
-  reminders.on("child_added", function (snapshot, prevChildKey) {
-    var newReminder = snapshot.val();
-    console.log("ON ADDED: Description: " + newReminder.description);
-    console.log("ON ADDED: DateTime: " + newReminder.dateTime);
-    console.log("ON ADDED: Priority: " + newReminder.priority);
-    console.log("ON ADDED: User: " + newReminder.user);
-    var dateTime = new Date(newReminder.dateTime);
-    var options = { minute: false};
-    var time = dateTime.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
-    console.log(time);
-    var reminderMarkup;
-    switch (newReminder.priority) {
-      case 0:
-        reminderMarkup = "<li id=\"note\" class=\"list-group-item\">" + newReminder.description + "  @  " + time + "</li>";
-        $("#reminder-list").append(reminderMarkup);
-        break;
-      case 1:
-        reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-danger\">" + newReminder.description + "  @  " + time + "<span id=\"badge\" class=\"badge\">&#x2757;</span>" + "</li>";
-        $("#reminder-list").prepend(reminderMarkup);
-        break;
-      case 2:
-        reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-warning\">" + newReminder.description + "  @  " + time + "</li>";
-        $("#reminder-list").append(reminderMarkup);
-        break;
-      case 3:
-        reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-success\">" + newReminder.description + "  @  " + time + "</li>";
-        $("#reminder-list").append(reminderMarkup);
-        break;
-    }
-  });
+    var reminders = firebase.database().ref().child(firebase.auth().currentUser.uid).child("reminders").orderByChild("priority");
+    reminders.on("child_added", function (snapshot, prevChildKey) {
+      console.log("Does it work?");
+      var newReminder = snapshot.val();
+      var dateTime = new Date(newReminder.dateTime);
+      var options = { minute: false};
+      var time = dateTime.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+      var reminderMarkup;
+      switch (newReminder.priority) {
+        case 4:
+          reminderMarkup = "<li id=\"note\" class=\"list-group-item\">" + newReminder.description + "  @  " + time + "</li>";
+          $("#reminder-list").append(reminderMarkup);
+          break;
+        case 1:
+          reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-danger\">" + newReminder.description + "  @  " + time + "<span id=\"badge\" class=\"badge\">&#x2757;</span>" + "</li>";
+          $("#reminder-list").prepend(reminderMarkup);
+          break;
+        case 2:
+          reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-warning\">" + newReminder.description + "  @  " + time + "</li>";
+          $("#reminder-list").append(reminderMarkup);
+          break;
+        case 3:
+          reminderMarkup = "<li id=\"note\" class=\"list-group-item list-group-item-success\">" + newReminder.description + "  @  " + time + "</li>";
+          $("#reminder-list").append(reminderMarkup);
+          break;
+      }
+
+    });
 }
 
 function goalWatch() {
   // TODO: Check for date
-  var goals = firebase.database().ref().child("goals");
+  var goals = firebase.database().ref().child("goals").orderByChild("priority");
   goals.on("child_added", function (snapshot, prevChildKey) {
     var newGoal = snapshot.val();
-    // console.log("ON ADDED: Description: " + newGoal.description);
-    // console.log("ON ADDED: DateTime: " + newGoal.dateTime);
-    // console.log("ON ADDED: Priority: " + newGoal.priority);
-    // console.log("ON ADDED: User: " + newGoal.user);
     var goalMarkup;
     switch (newGoal.priority) {
       case 0:
@@ -324,9 +326,6 @@ function noteWatch() {
   var notes = firebase.database().ref().child("notes");
   notes.on("child_added", function (snapshot, prevChildKey) {
     var newNote = snapshot.val();
-    // console.log("ON ADDED: Text: " + newNote.text);
-    // console.log("ON ADDED: DateTime: " + newNote.dateTime);
-    // console.log("ON ADDED: User: " + newNote.user);
     var noteMarkup = "<li id=\"note\" class=\"list-group-item\">" + newNote.text + "</li>";
     $("#notes-container").append(noteMarkup);
   });

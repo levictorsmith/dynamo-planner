@@ -67,6 +67,7 @@ function handleSignUp() {
     // [END_EXCLUDE]
   });
   // [END createwithemail]
+  addUserToDatabase();
 }
 /**
  * Sends an email verification to the user.
@@ -136,6 +137,7 @@ function initApp() {
       document.getElementById('sign-up-button').disabled = true;
       if (!emailVerified) {
         sendEmailVerification();
+        addUserToDatabase(uid);
       }
       // [END_EXCLUDE]
     } else {
@@ -156,3 +158,36 @@ function initApp() {
 window.onload = function() {
   initApp();
 };
+
+function addUserToDatabase(uid) {
+  firebase.database().ref().child(uid).set({
+    // id: uid,
+    events: {
+        123: {
+          description: "This is my first event",
+          dateTime: "date"
+        }
+      },
+    reminders: {
+      124: {
+        description: "This is a reminder",
+        dateTime: "date",
+        priority: 1
+      }
+    },
+    goals: {
+      125: {
+        description: "This is a goal",
+        dateTime: "date",
+        priority: 2
+      }
+    },
+    notes: {
+      126: {
+        text: "This is a note",
+        dateTime: "date"
+      }
+    }
+  });
+  console.log("ADDED USER TO THE DATABASE");
+}
