@@ -1,7 +1,8 @@
 /***********************************
  * Declare Global Variable
  ***********************************/
- var gEventIndex = 0;
+ var gEventIndex = 1;
+ var atFirst = true;
  var today = new Date().toLocaleDateString();
  console.log("TODAY: ", today);
 (function (){
@@ -43,8 +44,6 @@
         if(description) {
           var events = firebase.database().ref().child(userId).child("events");
           var newEvent = events.push();
-          gEventIndex++;
-          console.log(gEventIndex);
           newEvent.set({
             description: description,
             date: date,
@@ -164,6 +163,7 @@ app.controller('DatepickerPopupDemoCtrl', function ($scope) {
 function loadWatchers(uid) {
   firebase.auth().onAuthStateChanged(function (authData) {
     if (authData) {
+      setEventIndex(authData.uid);
       console.log("User is logged in");
       eventWatch(authData.uid);
       noteWatch(authData.uid);
@@ -174,6 +174,7 @@ function loadWatchers(uid) {
       $("#notes-container").empty();
       $("#goals-container").empty();
       $("#reminder-list").empty();
+      gEventIndex = 1;
     }
   });
 }
@@ -234,10 +235,23 @@ function eventWatch(uid) {
   var events = firebase.database().ref().child(uid).child("events").orderByChild("date").equalTo(today);
   events.on("child_added", function (snapshot, prevChildKey) {
     var newEvent = snapshot.val();
-    console.log("ON ADDED: Description: " + newEvent.description);
-    console.log("ON ADDED: Date: " + newEvent.date);
-    console.log("ON ADDED: Order: " + newEvent.order);
-    console.log("ON ADDED: Time: " + newEvent.time);
+    var colon = newEvent.time.search(':');
+    var median;
+    if (newEvent.time.search('AM') != -1) {
+      median = "AM";
+    } else {
+      median = "PM";
+    }
+    var hour = parseInt(newEvent.time.substring(0, colon));
+    var minute = parseInt(newEvent.time.substr(colon+1, 2));
+    // Insert into?
+    var timeSpanID = '#' + median + '-' + hour;
+    // $(timeSpanID)
+    if (minute >= 30) {
+      timeSpanID += "-30";
+    }
+    var markup = "<span id=\"badge\" class=\"badge\">" + newEvent.order + "</span>";
+    $(timeSpanID).prepend(markup);
   });
 }
 
@@ -320,6 +334,10 @@ $("#sign-in-button").focusin(function () {
   }
 });
 
-function test() {
-  console.log("HEY!");
+function setEventIndex(uid) {
+    var events = firebase.database().ref().child(uid).child("events").orderByChild("date").equalTo(today);
+    events.on("child_added", function (snapshot) {
+      gEventIndex++;
+      console.log("INDEX IS INCREMENTED TO", gEventIndex);
+    });
 }
