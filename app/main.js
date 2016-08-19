@@ -5,6 +5,7 @@
  var atFirst = true;
  var today = new Date().toLocaleDateString();
  console.log("TODAY: ", today);
+
 (function (){
   var app = angular.module('dynamo-planner', ['ui.bootstrap']);
   // define additional triggers on Tooltip and Popover
@@ -84,6 +85,12 @@
     return {
       restrict: 'E',
       templateUrl: 'noteModal.html'
+    };
+  });
+  app.directive('deleteModal', function () {
+    return {
+      restric: 'E',
+      templateUrl: 'deleteModal.html'
     };
   });
 
@@ -252,10 +259,10 @@ function eventWatch(uid) {
       timeSpanID += "-30";
     }
     // Add the event badge
-    var markup = "<span id=\"badge\" class=\"badge eventBadge\">" + newEvent.order + "</span>";
+    var markup = "<span id=\"badge" + "-" + newEvent.order + "\" class=\"badge eventBadge\" data-toggle=\"popover\" data-content=\"<h4>" + newEvent.description + "</h4>\" data-placement=\"bottom\" data-container=\"body\" data-html=\"true\">" + newEvent.order + "</span>";
     $(timeSpanID).prepend(markup);
     // Add the Event highlight
-    var markup2 = "<tr class=\"highlight-item\"><td><span id=\"rBadge\" class=\"badge\">" + newEvent.order + "</span><span>" + newEvent.description + "</span></td></tr>";
+    var markup2 = "<tr id=\"highlight-" + newEvent.order + "\" class=\"highlight-item\"><td><span id=\"rBadge\" class=\"badge\">" + newEvent.order + "</span><span>" + newEvent.description + "</span><button id=\"db-" + newEvent.order + "\" type=\"button\" class=\"close pull-right deleteButton\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></td></tr>";
     switch (hour) {
       case 1:
       case 2:
@@ -279,6 +286,12 @@ function eventWatch(uid) {
         }
         break;
     }
+    var badgeID = "#badge-" + newEvent.order;
+    showEvent(badgeID);
+    var dbID = "#db-" + newEvent.order;
+    $(dbID).click(function () {
+      $("#deleteModal").modal('show');
+    });
   });
 }
 
@@ -367,4 +380,28 @@ function setEventIndex(uid) {
       gEventIndex++;
       console.log("INDEX IS INCREMENTED TO", gEventIndex);
     });
+}
+
+function showEvent(badgeID) {
+  var isAndroid = /android/i.test(navigator.userAgent.toLowerCase());
+  var isWindows = /windows phone/i.test(navigator.userAgent.toLowerCase());
+  var isBlackberry = /blackberry/i.test(navigator.userAgent.toLowerCase());
+  var isiDevice = /ipad|iphone|ipod/i.test(navigator.userAgent.toLowerCase());
+
+  if(isAndroid || isWindows || isBlackberry || isiDevice){
+    // Add click listener to event badges
+    $(badgeID).click(function () {
+      $(this).popover('show');
+    });
+  } else {
+    // Add hover listener to event badges
+    $(badgeID).mouseover(function () {
+      console.log("THAT IS AWESOME");
+      $(this).popover('show');
+    });
+    $(badgeID).mouseleave(function () {
+      $(this).popover('hide');
+
+    });
+  }
 }

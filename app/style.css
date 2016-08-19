@@ -17,7 +17,7 @@ body {
 #schedule {
   width: 50%;
 }
-#badge {
+.eventBadge {
   background-color: #d9534f;
 }
 #rBadge {
@@ -43,6 +43,9 @@ border: 1px solid #ddd;
 }
 .highlight-item:hover {
   background-color: #ddd;
+}
+.deleteButton {
+  color: #d9534f;
 }
 /* STARRED-HIGHLIGHTS */
 #starred-highlights {

@@ -1,3 +1,11 @@
+// Initialize Firebase
+var config = {
+   apiKey: "AIzaSyAB-MckOG2fIHu7FKG4IFdoYfm3HlQFm5o",
+   authDomain: "dynamo-planner.firebaseapp.com",
+   databaseURL: "https://dynamo-planner.firebaseio.com",
+   storageBucket: "dynamo-planner.appspot.com",
+};
+firebase.initializeApp(config);
 var gUID;
 /**
  * Handles the sign in button press.
@@ -68,7 +76,6 @@ function handleSignUp() {
     // [END_EXCLUDE]
   });
   // [END createwithemail]
-  addUserToDatabase();
 }
 /**
  * Sends an email verification to the user.
@@ -133,10 +140,6 @@ function initApp() {
       var refreshToken = user.refreshToken;
       var providerData = user.providerData;
       gUID = uid;
-      // eventWatch(uid);
-      // reminderWatch(uid);
-      // goalWatch(uid);
-      // noteWatch(uid);
       // [START_EXCLUDE silent]
       document.getElementById('signed-in-as').textContent = 'Signed in as ' + email;
       document.getElementById('sign-in-button').textContent = 'Sign out';
