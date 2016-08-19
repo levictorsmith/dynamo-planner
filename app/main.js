@@ -93,7 +93,6 @@
       templateUrl: 'deleteModal.html'
     };
   });
-
   // TIMEPICKER CONTROLLER
   app.controller('TimepickerDemoCtrl', function ($scope, $log) {
   $scope.mytime = new Date();
@@ -271,17 +270,14 @@ function eventWatch(uid) {
       case 5:
       case 12:
         // Insert into noon
-        console.log("NOON");
         $("#noon").append(markup2);
         break;
       default:
         if (median == "AM") {
           // Insert into Morning
-          console.log("MORNING");
           $("#morning").append(markup2);
         } else {
           // Insert into Evening
-          console.log("EVENING");
           $("#evening").append(markup2);
         }
         break;
@@ -290,7 +286,13 @@ function eventWatch(uid) {
     showEvent(badgeID);
     var dbID = "#db-" + newEvent.order;
     $(dbID).click(function () {
+      console.log("DELETING", snapshot.key);
       $("#deleteModal").modal('show');
+      firebase.database().ref().child(uid).child("events").child(snapshot.key).remove();
+      setTimeout(function () {
+        $("#deleteModal").modal('hide');
+        location.reload();
+      }, 1500);
     });
   });
 }
@@ -358,7 +360,6 @@ function noteWatch(uid) {
   // TODO: Check for date
   var notes = firebase.database().ref().child(uid).child("notes");
   notes.on("child_added", function (snapshot, prevChildKey) {
-    console.log("HOW MANY TIMES?");
     var newNote = snapshot.val();
     if (newNote.date == today) {
       var noteMarkup = "<li id=\"note\" class=\"list-group-item\">" + newNote.text + "</li>";
@@ -368,7 +369,6 @@ function noteWatch(uid) {
 }
 
 $("#sign-in-button").focusin(function () {
-  console.log("Changed focus?");
   if (firebase.auth().currentUser) {
     $("#sign-in-button").click();
   }
@@ -378,7 +378,7 @@ function setEventIndex(uid) {
     var events = firebase.database().ref().child(uid).child("events").orderByChild("date").equalTo(today);
     events.on("child_added", function (snapshot) {
       gEventIndex++;
-      console.log("INDEX IS INCREMENTED TO", gEventIndex);
+      // console.log("INDEX IS INCREMENTED TO", gEventIndex);
     });
 }
 
@@ -396,7 +396,6 @@ function showEvent(badgeID) {
   } else {
     // Add hover listener to event badges
     $(badgeID).mouseover(function () {
-      console.log("THAT IS AWESOME");
       $(this).popover('show');
     });
     $(badgeID).mouseleave(function () {
