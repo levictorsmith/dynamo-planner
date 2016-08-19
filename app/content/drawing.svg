@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="30"
+   height="30"
+   viewBox="0 0 541.63911 550.00002"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   inkscape:export-filename="/home/levan/Pictures/dynamo/logo.png"
+   inkscape:export-xdpi="149.54607"
+   inkscape:export-ydpi="149.54607"
+   sodipodi:docname="drawing.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.55325521"
+     inkscape:cx="40.886087"
+     inkscape:cy="365.10976"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1301"
+     inkscape:window-height="744"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-59.159889,-92.064631)">
+    <g
+       id="g3574">
+      <path
+         style="opacity:1;fill:#008080;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 62.134766 0 L 62.134766 550 L 266.63867 550 L 272.88477 550 L 272.88477 549.85156 A 275 275 0 0 0 504.79688 412.5 A 275 275 0 0 0 504.79688 137.5 A 275 275 0 0 0 272.88477 0.3125 L 272.88477 0 L 266.63867 0 L 62.134766 0 z M 185.49414 139.9707 L 283.61719 139.9707 L 286.61328 139.9707 L 286.61328 140.12109 A 131.94829 131.94829 0 0 1 397.88867 205.94531 A 131.94829 131.94829 0 0 1 397.88867 337.89453 A 131.94829 131.94829 0 0 1 286.61328 403.79688 L 286.61328 403.86719 L 283.61719 403.86719 L 185.49414 403.86719 L 185.49414 139.9707 z "
+         transform="translate(59.159889,92.064631)"
+         id="path3502" />
+    </g>
+    <g
+       id="g3528" />
+    <g
+       id="g3479"
+       transform="matrix(0.98158895,0,0,0.98158895,-98.101841,102.70987)"
+       style="fill:#ffff00">
+      <g
+         id="g3437"
+         style="fill:#ffff00">
+        <g
+           id="g3439"
+           style="fill:#ffff00">
+          <path
+             id="path3441"
+             d="m 220.17539,549.4711 c 0,0 194.42,-421.925 194.444,-421.986 l 10.79,-23.997 c -41.824,12.02 -135.271,34.902 -135.57,35.833 9.773,-27.35 51.83,-150.166005 53.642,-150.166005 -39.976,0 -79.952,0 -119.927,0 l -12.167,57.938 -51.176,209.995005 135.191,-36.806 -75.227,329.189 z"
+             inkscape:connector-curvature="0"
+             style="fill:#ffff00" />
+        </g>
+      </g>
+      <g
+         id="g3443"
+         style="fill:#ffff00" />
+      <g
+         id="g3445"
+         style="fill:#ffff00" />
+      <g
+         id="g3447"
+         style="fill:#ffff00" />
+      <g
+         id="g3449"
+         style="fill:#ffff00" />
+      <g
+         id="g3451"
+         style="fill:#ffff00" />
+      <g
+         id="g3453"
+         style="fill:#ffff00" />
+      <g
+         id="g3455"
+         style="fill:#ffff00" />
+      <g
+         id="g3457"
+         style="fill:#ffff00" />
+      <g
+         id="g3459"
+         style="fill:#ffff00" />
+      <g
+         id="g3461"
+         style="fill:#ffff00" />
+      <g
+         id="g3463"
+         style="fill:#ffff00" />
+      <g
+         id="g3465"
+         style="fill:#ffff00" />
+      <g
+         id="g3467"
+         style="fill:#ffff00" />
+      <g
+         id="g3469"
+         style="fill:#ffff00" />
+      <g
+         id="g3471"
+         style="fill:#ffff00" />
+    </g>
+  </g>
+</svg>
